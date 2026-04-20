@@ -23,7 +23,7 @@ export default function HeroSection({
   onOnlyFreeChange,
 }: HeroSectionProps) {
   return (
-    <section className="bg-secondary flex flex-col gap-4 rounded-3xl shadow-lg">
+    <section className="bg-primary flex flex-col gap-4 rounded-3xl shadow-lg">
       <div className="relative">
         <Image
           src="/hero-img.webp"
@@ -40,7 +40,7 @@ export default function HeroSection({
           Find &amp; make fun events near you
         </h1>
 
-        <p className="text-muted text-base md:text-lg">
+        <p className="text-primary text-base md:text-lg">
           Explore concerts, workshops, meetups, and more. Filter by category,
           time, and location.
         </p>
@@ -53,7 +53,7 @@ export default function HeroSection({
                 value={keyword}
                 onChange={(e) => onKeywordChange(e.target.value)}
                 placeholder="Find events (e.g. Music, Workshop)"
-                className="bg-tertiary border-lines h-12 w-full rounded-xl border pr-3 pl-8 outline-none"
+                className="border-lines h-12 w-full rounded-xl border bg-white pr-3 pl-8 outline-none"
               />
             </div>
 
@@ -63,12 +63,12 @@ export default function HeroSection({
                 value={location}
                 onChange={(e) => onLocationChange(e.target.value)}
                 placeholder="Location (e.g. Jakarta, Bandung)"
-                className="bg-tertiary border-lines h-12 w-full rounded-xl border pr-3 pl-8 outline-none"
+                className="border-lines h-12 w-full rounded-xl border bg-white pr-3 pl-8 outline-none"
               />
             </div>
           </div>
         </div>
-        <div className="text-muted mt-3 flex flex-wrap items-center gap-2 text-xs">
+        <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-black">
           <label className="flex cursor-pointer items-center gap-2">
             <input
               type="checkbox"
