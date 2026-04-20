@@ -32,7 +32,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
 
   const isEventsPage = pathname.startsWith("/events");
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -50,7 +49,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [dropdownOpen]);
 
-  // Map role dari backend (UPPERCASE) ke format yang diharapkan (lowercase)
   const getUserRole = (): "admin" | "organizer" | "customer" | "guest" => {
     if (!session?.user?.role) return "guest";
 
@@ -136,7 +134,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
     await signOut({ callbackUrl: "/" });
   };
 
-  // Get profile link based on role
   const getProfileLink = () => {
     switch (role) {
       case "admin":
@@ -150,7 +147,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
     }
   };
 
-  // Get dashboard link based on role
   const getDashboardLink = () => {
     switch (role) {
       case "admin":
@@ -187,9 +183,8 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
   };
 
   return (
-    <header className="bg-secondary sticky top-0 z-50 w-full shadow-lg">
+    <header className="bg-primary sticky top-0 z-50 w-full shadow-lg">
       <nav className="mx-auto flex h-14 items-center justify-between gap-4 px-3 md:h-16 md:px-4">
-        {/* Left */}
         <div className="flex items-center gap-4">
           <Link
             href="/"
@@ -198,7 +193,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             {brand}
           </Link>
 
-          {/* Left links (desktop) */}
           <ul className="ml-2 hidden items-center gap-2 sm:flex">
             {common.map((l) => (
               <li key={l.href}>
@@ -218,7 +212,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
           </ul>
         </div>
 
-        {/* Right */}
         <div className="flex items-center gap-4">
           {!isEventsPage && (
             <div className="hidden min-w-md flex-1 items-center xl:flex">
@@ -228,7 +221,7 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
                   onChange={(e) => setQ(e.target.value)}
                   onKeyDown={handleSearchKeyDown}
                   placeholder="Search events..."
-                  className="bg-tertiary w-full rounded-full py-2 pr-12 pl-4 outline-none"
+                  className="bg-tertiary w-full rounded-full border border-gray-300 py-2 pr-12 pl-4 outline-none"
                 />
                 <div className="text-md bg-secondary text-muted pointer-events-none absolute top-1/2 right-1 -translate-y-1/2 rounded-full p-2">
                   <IoSearch className="h-5 w-5" />
@@ -237,10 +230,8 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             </div>
           )}
 
-          {/* User Info & Logout (jika sudah login) */}
           {status === "authenticated" && session?.user && (
             <div className="relative hidden items-center gap-3 xl:flex">
-              {/* User Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -260,7 +251,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
                   />
                 </button>
 
-                {/* Dropdown Menu */}
                 {dropdownOpen && (
                   <div className="bg-tertiary border-secondary absolute top-full right-0 z-100 mt-2 w-56 overflow-hidden rounded-lg border shadow-2xl">
                     <div className="border-secondary border-b p-3">
@@ -308,7 +298,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             </div>
           )}
 
-          {/* Right links (desktop) - hanya tampil jika belum login */}
           {status !== "authenticated" && (
             <ul className="ml-2 hidden items-center gap-2 xl:flex">
               {rightLinks.map((l) => (
@@ -329,7 +318,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             </ul>
           )}
 
-          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -345,7 +333,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Mobile Panel */}
       <div className={`xl:hidden ${open ? "block" : "hidden"}`}>
         <div className="px-3 py-3 md:px-4">
           {!isEventsPage && (
@@ -363,7 +350,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             </div>
           )}
 
-          {/* User Info (Mobile) */}
           {status === "authenticated" && session?.user && (
             <div className="bg-tertiary mt-4 rounded-lg p-3">
               <div className="mb-3 flex items-center gap-2">
@@ -411,7 +397,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             </div>
           )}
 
-          {/* Common Links (Mobile) */}
           <div className="grid gap-2 sm:hidden">
             {common.map((l) => (
               <Link
@@ -428,7 +413,6 @@ export default function Navbar({ brand = "evora" }: NavbarProps) {
             ))}
           </div>
 
-          {/* Right Links (Mobile) */}
           <div className="mt-2 grid gap-2">
             {rightLinks.map((l) => (
               <Link
